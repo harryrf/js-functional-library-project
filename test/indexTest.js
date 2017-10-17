@@ -6,7 +6,7 @@ describe('index.js', function () {
 
 
   describe('each', function () {
-    const alert = sinon.spy();
+    const alert = chai.spy();
     const testArr = [1, 2, 3, 4]
     const testObj = Object.assign({}, unmodifiedTestObj)
 
