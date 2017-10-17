@@ -1,5 +1,4 @@
 const expect = chai.expect
-var sinon = require('sinon');
 
 describe('index.js', function () {
   const unmodifiedTestArr = [1, 2, 3, 4]
@@ -13,7 +12,7 @@ describe('index.js', function () {
 
     it('calls alert with each element passed', function () {
       fi.each(testArr, alert)
-      expect(func).to.have.been.called.exactly(testArr.length)
+      expect(alert).to.have.been.called.exactly(testArr.length)
     })
 
     it('calls alert properly on object values and returns the original collection', function () {
@@ -136,7 +135,7 @@ describe('index.js', function () {
     })
 
     it('returns the first n elements of the collection when the second optional argument (n) is provided', function () {
-      expect(arraysEqual(fi.first(testArr, 3), [1, 2, 3]).to.equal(true)
+      expect(arraysEqual(fi.first(testArr, 3), [1, 2, 3])).to.equal(true)
     })
   })
 
@@ -240,13 +239,13 @@ describe('index.js', function () {
     const objC = {c: 3, d: 4}
 
     it('removes duplicate values from an array', function () {
-      expect(arraysEqual(fi.uniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6]).to.equal(true)
-      expect(arraysEqual(fi.uniq([objA, objC, objB]), [objA, objC]).to.equal(true)
+      expect(arraysEqual(fi.uniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6])).to.equal(true)
+      expect(arraysEqual(fi.uniq([objA, objC, objB]), [objA, objC])).to.equal(true)
     })
 
     it('removes duplicate values from an array when an iteratee is applied', function () {
       const newArr = fi.uniq([1, 2, 2, 3, 4, 6, 9], false, ((val) => ((val % 3) === 0 ? (val / 3) : val)))
-      expect(arraysEqual(newArr, [1, 2, 3, 4]).to.equal(true)
+      expect(arraysEqual(newArr, [1, 2, 3, 4])).to.equal(true)
     })
 
     it('runs materially quicker when run on a pre-sorted array', function () {
