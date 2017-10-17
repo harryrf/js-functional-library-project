@@ -164,6 +164,8 @@ describe('index.js', function () {
 
     it('does not modify the original array', function () {
       fi.compact(nonsenseArr)
+      console.log(nonsenseArr)
+      console.log([1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined])
       expect(arraysEqual(nonsenseArr, [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined])).to.equal(true)
     })
   })
