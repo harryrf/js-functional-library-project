@@ -16,8 +16,16 @@ describe('index.js', function () {
     })
 
     it('calls alert properly on object values and returns the original collection', function () {
-      const result = fi.each(testObj, alert)
-      assertAlerts(testObj, alert)
+      function spyWithOneArg(x) {return true}
+
+      var spy = chai.spy(spyWithOneArg);
+      const result = fi.each(testObj, spy)
+      const objValues = Object.values(testObj)
+
+      for (let idx = 0; idx < objValues.length; idx++)
+        expect(spy).to.have.been.called.with(objValues[idx])
+
+      // expect(spy).to.have.been.called.with('foo');
       expect(objectsEqual(testObj, result)).to.equal(false)
     })
   })
@@ -88,7 +96,7 @@ describe('index.js', function () {
 
     it('does not traverse the whole array if the value is found early', function () {
       const watchedCB = findCBGenerator(0)
-      sinon.spy(watchedCB)
+      chai.spy(watchedCB)
       fi.find(intArr, watchedCB)
       expect(watchedCB).to.have.been.called.exactly(3)
     })

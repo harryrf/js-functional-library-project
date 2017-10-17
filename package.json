@@ -30,6 +30,6 @@
     "learn-browser": "^0.1.13"
   },
   "dependencies": {
-    "chai-spies": "^0.7.1"
+    "chai-spies-next": "^0.9.3"
   }
 }
