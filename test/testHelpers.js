@@ -2,7 +2,7 @@ function arraysEqual(arrA, arrB) {
   if (arrA.length !== arrB.length) return false
   for (let idx = 0; idx < arrA.length; idx++) {
     if (arrA[idx] !== arrB[idx]) {
-      if (isNan(arrA) && isNan(arrB)) continue
+      if (isNaN(arrA) && isNaN(arrB)) continue
       return false
     }
   }
@@ -47,14 +47,10 @@ var bench = function(method, iterations, args, context) {
         result.push(method.apply(context, args));
         i++;
     }
-
     var execTime = timer('stop');
 
-    if ( typeof console === "object") {
-        console.log("Mean execution time was: ", execTime / iterations);
-        console.log("Sum execution time was: ", execTime);
-        console.log("Result of the method call was:", result[0]);
-    }
-
-    return execTime / iterations;
+    // console.log("Mean execution time was: ", execTime / parseFloat(iterations));
+    // console.log("Sum execution time was: ", execTime);
+    // console.log("Result of the method call was:", result[0]);
+    return execTime / parseFloat(iterations);
 };

@@ -164,8 +164,6 @@ describe('index.js', function () {
 
     it('does not modify the original array', function () {
       fi.compact(nonsenseArr)
-      console.log(nonsenseArr)
-      console.log([1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined])
       expect(arraysEqual(nonsenseArr, [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined])).to.equal(true)
     })
   })
@@ -254,13 +252,9 @@ describe('index.js', function () {
     })
 
     it('runs materially quicker when run on a pre-sorted array', function () {
-      const unsortedTime = bench(fi.uniq, 3, [largeUnsortedArr, false], this)
-      const sortedTime = bench(fi.uniq, 3, [largeSortedArr, true], this)
-      // TODO MAKE SURE THIS IS WORKING
-      console.error("unsorted time: ", unsortedTime)
-      console.error("sorted time: ", sortedTime)
-      const handicappedSortedTime = sortedTime + (sortedTime * .2)
-      expect(handicappedSortedTime < sortedTime).to.equal(true)
+      const unsortedTime = bench(fi.uniq, 5, [largeUnsortedArr, false], this)
+      const sortedTime = bench(fi.uniq, 5, [largeSortedArr, true], this)
+      expect(sortedTime < (unsortedTime/2.0)).to.equal(true)
     })
 
   })
@@ -292,6 +286,7 @@ describe('index.js', function () {
 
   describe('functions', function () {
     const mathMethods = Object.getOwnPropertyNames(Math)
+    console.log(fi.functions(Math))
 
     it('makes the function work', function () {
       expect(arraysEqual(fi.functions(Math), mathMethods)).to.equal(true)

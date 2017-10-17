@@ -134,16 +134,21 @@ let fi = (function() {
       }
     },
 
-    uniq: function(array, isSorted, callback) {
-      let uniqueArr = []
-      for (let i = 0; i < array.length; i++) {
-        let ele = array[i]
-        if (uniqueArr.indexOf(ele) === -1) {
-          if (callback) { ele = callback(ele) }
-          uniqueArr.push(ele)
+    uniqSorted: function(arr) {
+      const newArr = []
+      let lastVal = null
+      for (let idx = 0; idx < arr.length; idx++) {
+        if (arr[idx] !== lastVal) {
+          newArr.push(arr[idx])
+          lastVal = arr[idx]
         }
       }
-      return uniqueArr
+      return newArr
+    },
+
+    uniq: function(array, isSorted=false, callback=false) {
+      const newArr = (callback) ? array.map(x => callback(x)) : array.slice()
+      return (isSorted) ? fi.uniqSorted(newArr) : Array.from(new Set(newArr))
     },
 
     bind: function(fn, obj, args) {
@@ -171,11 +176,7 @@ let fi = (function() {
     },
 
     functions: function(obj) {
-      let fnNames = []
-      for (let key in obj) {
-        if (typeof obj[key] === 'function') { fnNames.push(key) }
-      }
-      return fnNames.sort()
+      return Object.getOwnPropertyNames(obj)
     },
 
   }
