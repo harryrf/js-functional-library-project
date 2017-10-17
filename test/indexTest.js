@@ -21,12 +21,9 @@ describe('index.js', function () {
       var spy = chai.spy(spyWithOneArg);
       const result = fi.each(testObj, spy)
       const objValues = Object.values(testObj)
-
-      for (let idx = 0; idx < objValues.length; idx++)
-        expect(spy).to.have.been.called.with(objValues[idx])
-
-      // expect(spy).to.have.been.called.with('foo');
-      expect(objectsEqual(testObj, result)).to.equal(false)
+      objValues.forEach((val) => { expect(spy).to.have.been.called.with(val) })
+      expect(testObj === result).to.equal(true)
+      expect(objectsEqual(testObj, result)).to.equal(true)
     })
   })
 
@@ -52,23 +49,22 @@ describe('index.js', function () {
     })
 
     it('does not modify the original object', function () {
-      expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(false)
+      expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(true)
     })
   })
 
   describe('reduce', function () {
     const testArr = unmodifiedTestArr.slice()
     const callback = (x) => (x * 3)
-
     const reduceSansAcc = fi.reduce(testArr, callback)
     const reduceWithAcc = fi.reduce(testArr, callback, 10)
 
     it('returns the correct reduced value when not passed an accumulator', function () {
-      expect(reduceSansAcc).to.equal(10)
+      expect(reduceSansAcc).to.equal(30)
     })
 
     it('returns the correct reduced value when passed an accumulator', function () {
-      expect(reduceWithAcc).to.equal(20)
+      expect(reduceWithAcc).to.equal(40)
     })
 
     it('does not modify the original array', function () {

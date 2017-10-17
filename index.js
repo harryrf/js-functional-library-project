@@ -34,14 +34,9 @@ let fi = (function() {
       return mapped
     },
 
-    reduce: function(list, callback, memo, context) {
-      for(let i = 0; i < list.length; i++) {
-        if (memo !== undefined) {
-          memo = callback.call(context, memo, list[i], i, list)
-        } else {
-          memo = list[i]
-        }
-      }
+    reduce: function(list, callback, memo=0) {
+      for (let i = 0; i < list.length; i++)
+        memo += callback(list[i])
       return memo
     },
 
