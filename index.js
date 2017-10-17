@@ -42,8 +42,9 @@ let fi = (function() {
 
     find: function(list, findFunction, context) {
       for(let i = 0; i < list.length; i++) {
-        if (findFunction.call(context, list[i], i, list)) { return list[i] }
+        if (findFunction.call(context, list[i], i, list)) { return true }
       }
+      return false
     },
 
     filter: function(list, predicateFunc, context) {

@@ -91,16 +91,15 @@ describe('index.js', function () {
     })
 
     it('does not traverse the whole array if the value is found early', function () {
-      const watchedCB = findCBGenerator(0)
-      chai.spy(watchedCB)
-      fi.find(intArr, watchedCB)
-      expect(watchedCB).to.have.been.called.exactly(3)
+      const spy = chai.spy(findCBGenerator(0))
+      fi.find(intArr, spy)
+      expect(spy).to.have.been.called.exactly(3)
     })
 
     it('returns false if the value is not present', function () {
-      expect(fi.find(intArr, findCBGen(7))).to.equal(false)
-      expect(fi.find(strArr, findCBGen("maxwellisbestmax"))).to.equal(false)
-      expect(fi.find(objArr, findCBGen({c: 'c'}))).to.equal(false)
+      expect(fi.find(intArr, findCBGenerator(7))).to.equal(false)
+      expect(fi.find(strArr, findCBGenerator("maxwellisbestmax"))).to.equal(false)
+      expect(fi.find(objArr, findCBGenerator({c: 'c'}))).to.equal(false)
     })
 
   })
