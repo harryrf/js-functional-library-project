@@ -102,8 +102,7 @@ let fi = (function() {
     },
 
     first: function(array, idx) {
-      if (idx) { return array.slice(0, idx) }
-      return array[0]
+      return (idx) ? array.slice(0, idx) : array[0]
     },
 
     last: function(array, idx) {
