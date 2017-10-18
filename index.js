@@ -34,10 +34,13 @@ let fi = (function() {
       return mapped
     },
 
-    reduce: function(list, callback, memo=0) {
-      for (let i = 0; i < list.length; i++)
-        memo += callback(list[i])
-      return memo
+    reduce: function(collection, callback, acc) {
+      if (!Array.isArray(collection))
+        collection = Object.values(collection)
+
+      for (let idx = 0; idx < collection.length; idx++)
+        acc = (acc + callback(acc, collection[idx], collection)) || callback(acc, collection[idx], collection)
+      return acc
     },
 
     find: function(list, findFunction, context) {

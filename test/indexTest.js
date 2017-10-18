@@ -17,7 +17,6 @@ describe('index.js', function () {
 
     it('calls alert properly on object values and returns the original collection', function () {
       function spyWithOneArg(x) {return true}
-
       var spy = chai.spy(spyWithOneArg);
       const result = fi.each(testObj, spy)
       const objValues = Object.values(testObj)
@@ -54,8 +53,8 @@ describe('index.js', function () {
   })
 
   describe('reduce', function () {
-    const testArr = unmodifiedTestArr.slice()
-    const callback = (x) => (x * 3)
+    const testArr = unmodifiedTestArr.slice() // arr is [1, 2, 3, 4]
+    const callback = (acc, val, collection) => (val * 3) // modified values are [3, 6, 9, 12]
     const reduceSansAcc = fi.reduce(testArr, callback)
     const reduceWithAcc = fi.reduce(testArr, callback, 10)
 
