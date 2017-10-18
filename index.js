@@ -106,8 +106,7 @@ let fi = (function() {
     },
 
     last: function(array, idx) {
-      if (idx) { return array.slice(array.length - idx) }
-      return array[array.length-1]
+      return (idx) ? array.slice(array.length - idx) : array[array.length-1]
     },
 
     compact: function(array) {
