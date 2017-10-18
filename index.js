@@ -37,9 +37,9 @@ let fi = (function() {
     reduce: function(collection, callback, acc) {
       if (!Array.isArray(collection))
         collection = Object.values(collection)
-
-      for (let idx = 0; idx < collection.length; idx++)
-        acc = (acc + callback(acc, collection[idx], collection)) || callback(acc, collection[idx], collection)
+      
+      for (let idx = 0; idx < collection.length; idx++) 
+        acc = callback(acc, collection[idx], collection)
       return acc
     },
 
